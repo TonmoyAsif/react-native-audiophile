@@ -7,6 +7,8 @@ import HomeCategory from "../components/home-category";
 import { colors, spacing } from "../theme";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts, selectStatus, selectFeaturedProducts } from "../../redux/productSlice";
+import Text from "../components/text/text";
+import FeaturedProduct from "../components/featured-product";
 
 export default function Home({ navigation }) {
   const dispatch = useDispatch()
@@ -56,22 +58,28 @@ export default function Home({ navigation }) {
             }}
           />
         </View>
-        {/* <View style={styles.featuredSection}>
+        <View style={styles.featuredSection}>
           <View style={styles.featuredSectionTitle}>
-            <Text style={styles.featuredSectionTitleText}>Featured Products</Text>
+            <Text preset='h5' uppercase>Featured</Text>
+            <Text preset='h5' uppercase>Products</Text>
           </View>
-          <View style={styles.featuredSectionProducts}>
-            {featuredProducts.map((product) => (
-              <HomeProduct
-                key={product.id}
-                product={product}
-                onPress={() => {
-                  navigation.navigate("Product", { product });
-                }}
-              />
-            ))}
+          <View>
+            {
+              featuredProducts.map((product) => {
+                const { name, category, featuredImage } = product;
+                return (
+                  <FeaturedProduct
+                    key={product.id}
+                    name={name}
+                    category={category}
+                    image={featuredImage}
+                    onPress={ () => {}}
+                  />
+                )
+              })
+            }
           </View>
-        </View> */}
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -85,5 +93,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center"
+  },
+  featuredSection: {
+    paddingHorizontal: spacing[4],
+    paddingVertical: spacing[4],
+  },
+  featuredSectionTitle: {
+    alignItems: "center",
   }
 });

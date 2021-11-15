@@ -40,5 +40,8 @@ export const productsSlice = createSlice({
 
 export const selectStatus = state => state.products.status;
 export const selectFeaturedProducts = state => state.products.products.filter(product => product.is_featured);
+export const selectHeadphones = state => state.products.products.filter(product => product.category === 'headphones');
+export const selectSpeakers = state => state.products.products.filter(product => product.category === 'speakers');
+export const selectEarphones = state => state.products.products.filter(product => product.category === 'earphones');
 
 export default productsSlice.reducer;

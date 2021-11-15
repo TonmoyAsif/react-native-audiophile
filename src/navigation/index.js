@@ -105,7 +105,7 @@ const HomeStack = createNativeStackNavigator();
 function HomeStackScreens() {
   return (
     <HomeStack.Navigator screenOptions={{ headerShown: false }}>
-      <HomeStack.Screen name="Home" component={Home} />
+      <HomeStack.Screen name="HomeScreen" component={Home} />
     </HomeStack.Navigator>
   );
 }
@@ -114,7 +114,7 @@ const HeadphonesStack = createNativeStackNavigator();
 function HeadphonesStackScreens() {
   return (
     <HeadphonesStack.Navigator screenOptions={{ headerShown: false }}>
-      <HeadphonesStack.Screen name="Headphones" component={Headphones} />
+      <HeadphonesStack.Screen name="HeadphonesScreen" component={Headphones} />
       <HeadphonesStack.Screen name="ProductDetails" component={ProductDetails} />
     </HeadphonesStack.Navigator>
   );
@@ -124,7 +124,7 @@ const EarphonesStack = createNativeStackNavigator();
 function EarphonesStackScreens() {
   return (
     <EarphonesStack.Navigator screenOptions={{ headerShown: false }}>
-      <EarphonesStack.Screen name="Earphones" component={Earphones} />
+      <EarphonesStack.Screen name="EarphonesScreen" component={Earphones} />
       <EarphonesStack.Screen name="ProductDetails" component={ProductDetails} />
     </EarphonesStack.Navigator>
   );
@@ -134,7 +134,7 @@ const SpeakersStack = createNativeStackNavigator();
 function SpeakersStackScreens() {
   return (
     <SpeakersStack.Navigator screenOptions={{ headerShown: false }}>
-      <SpeakersStack.Screen name="Speakers" component={Speakers} />
+      <SpeakersStack.Screen name="SpeakersScreen" component={Speakers} />
       <SpeakersStack.Screen name="ProductDetails" component={ProductDetails} />
     </SpeakersStack.Navigator>
   );
@@ -144,7 +144,7 @@ const CartStack = createNativeStackNavigator();
 function CartStackScreens() {
   return (
     <CartStack.Navigator screenOptions={{ headerShown: false }}>
-      <CartStack.Screen name="Cart" component={Cart} />
+      <CartStack.Screen name="CartScreen" component={Cart} />
       <CartStack.Screen name="Checkout" component={Checkout} />
     </CartStack.Navigator>
   );
