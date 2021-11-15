@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import counterReducer from './counterSlice'
+import productsReducer from './productSlice'
 import { combineReducers } from 'redux'
 
 // const rootReducer = combineReducers({
 //   counter: counterReducer,
+//   products: productsReducer,
 // })
 
 // export const store = configureStore({
@@ -12,6 +14,7 @@ import { combineReducers } from 'redux'
 
 export default configureStore({
     reducer: {
-        counter: counterReducer
+        counter: counterReducer,
+        products: productsReducer
     }
 })

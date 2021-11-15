@@ -2,7 +2,7 @@ import React from "react";
 import { View, StyleSheet, Image } from "react-native";
 import Text from "./text/text";
 import { colors, spacing } from "../theme";
-// import LottieView from 'lottie-react-native';
+import LottieView from 'lottie-react-native';
 
 export default function HomeBanner() {
   return (
@@ -24,9 +24,9 @@ export default function HomeBanner() {
           Experience natural, lifelike audio and exceptional build quality made
           for the passionate music enthusiast.
         </Text>
-        {/* <LottieView style={styles.scrollDownIcon} autoPlay loop 
-              source={require('../../assets/images/scroll-down.json')}
-            />; */}
+        <LottieView style={styles.scrollDownIcon} autoPlay loop 
+          source={require('../../assets/images/scroll-down.json')}
+        />
       </View>
     </View>
   );
@@ -52,8 +52,9 @@ const styles = StyleSheet.create({
     alignSelf: "center",
   },
   scrollDownIcon: {
+    marginTop: spacing[2],
     height: 60,
     width: 60,
-    alignSelf: "center",
+    alignSelf: "center"
   },
 });

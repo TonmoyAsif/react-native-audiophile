@@ -115,10 +115,7 @@ function HeadphonesStackScreens() {
   return (
     <HeadphonesStack.Navigator screenOptions={{ headerShown: false }}>
       <HeadphonesStack.Screen name="Headphones" component={Headphones} />
-      <HeadphonesStack.Screen
-        name="ProductDetails"
-        component={ProductDetails}
-      />
+      <HeadphonesStack.Screen name="ProductDetails" component={ProductDetails} />
     </HeadphonesStack.Navigator>
   );
 }
