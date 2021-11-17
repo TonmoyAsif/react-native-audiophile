@@ -66,10 +66,11 @@ export default function Home({ navigation }) {
           <View>
             {
               featuredProducts.map((product) => {
-                const { name, category, featuredImage } = product;
+                const { id, name, category, featuredImage } = product;
                 return (
                   <FeaturedProduct
                     key={product.id}
+                    id={id}
                     name={name}
                     category={category}
                     image={featuredImage}

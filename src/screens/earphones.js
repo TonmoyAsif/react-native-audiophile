@@ -7,25 +7,24 @@ import CategoryTitle from "../components/category-title";
 import { useDispatch, useSelector } from "react-redux";
 import { selectEarphones } from "../../redux/productSlice";
 import { colors, spacing } from "../theme";
-import { Ionicons } from "@expo/vector-icons";
 import CategoryFooter from "../components/category-footer";
 
-export default function Earphones() {
+export default function Earphones({ navigation }) {
   const earphones = useSelector(selectEarphones);
+
+  const onPressSeeProduct = (id) => {
+    navigation.navigate("ProductDetails", { id });
+  }
 
   return (
     <SafeAreaView>
       <ScrollView>
         <AppHeader />
         <CategoryTitle title="earphones" />
-        {/* <Pressable style={styles.backButton}>
-          <Ionicons name="chevron-back-sharp" size={20} color="black" />
-          <Text preset='light' style={{color: 'black'}}>Go Back</Text>
-        </Pressable> */}
         <View style={styles.categorySection}>
           {earphones.map((earphone) => {
             return (
-              <View key={earphones.name} style={styles.categoryBox}>
+              <View key={earphone.name} style={styles.categoryBox}>
                 <View style={styles.imageBox}>
                   <Image
                     source={earphone.featuredImage.source}
@@ -43,8 +42,8 @@ export default function Earphones() {
                   <Text preset="light" style={styles.description}>
                     {earphone.description}
                   </Text>
-                  <Pressable style={styles.button}>
-                    <Text uppercase white>
+                  <Pressable style={styles.button} onPress={() => onPressSeeProduct(earphone.id)}>
+                    <Text preset='subtitle' uppercase white>
                       See product
                     </Text>
                   </Pressable>
@@ -96,7 +95,7 @@ const styles = StyleSheet.create({
   description: {
     marginVertical: spacing[5],
     marginHorizontal: spacing[5],
-    color: "black",
+    color: colors.darkGrey,
     textAlign: "center",
   },
   button: {

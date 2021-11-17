@@ -43,5 +43,6 @@ export const selectFeaturedProducts = state => state.products.products.filter(pr
 export const selectHeadphones = state => state.products.products.filter(product => product.category === 'headphones');
 export const selectSpeakers = state => state.products.products.filter(product => product.category === 'speakers');
 export const selectEarphones = state => state.products.products.filter(product => product.category === 'earphones');
+export const selectProductById = (state, id) => state.products.products.find(product => product.id === id);
 
 export default productsSlice.reducer;

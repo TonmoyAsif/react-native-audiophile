@@ -106,6 +106,7 @@ function HomeStackScreens() {
   return (
     <HomeStack.Navigator screenOptions={{ headerShown: false }}>
       <HomeStack.Screen name="HomeScreen" component={Home} />
+      <HomeStack.Screen name="ProductDetails" component={ProductDetails} />
     </HomeStack.Navigator>
   );
 }

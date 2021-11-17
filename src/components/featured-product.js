@@ -2,9 +2,15 @@ import React from 'react';
 import { StyleSheet, useWindowDimensions, View, Image, Pressable } from 'react-native';
 import Text from './text/text';
 import { colors, spacing } from "../theme";
+import { useNavigation } from "@react-navigation/native";
 
-export default function FeaturedProduct({ name, category, image }) {
+export default function FeaturedProduct({ id, name, category, image }) {
     const windowWidth = useWindowDimensions().width
+    const navigation = useNavigation();
+    const onPressSeeProduct = () => {
+      navigation.navigate("ProductDetails", { id });
+    }
+
     return (
         <View style={styles.featuredBox}>
             <View style={[styles.outerCircle, {width: windowWidth - 75}]}>
@@ -17,7 +23,7 @@ export default function FeaturedProduct({ name, category, image }) {
                 <Text preset='h6' uppercase white>{category}</Text>
                 <Text preset='light' style={styles.details}>Upgrade to premium speakers that are phenomenally built to deliver truly remarkable sound.</Text>
             </View>
-            <Pressable style={styles.button}>
+            <Pressable onPress={onPressSeeProduct} style={styles.button}>
                 <Text uppercase white>See product</Text>
             </Pressable>
         </View>

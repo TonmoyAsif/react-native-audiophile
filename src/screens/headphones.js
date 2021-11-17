@@ -7,21 +7,20 @@ import CategoryTitle from "../components/category-title";
 import { useDispatch, useSelector } from "react-redux";
 import { selectHeadphones } from "../../redux/productSlice";
 import { colors, spacing } from "../theme";
-import { Ionicons } from "@expo/vector-icons";
 import CategoryFooter from "../components/category-footer";
 
-export default function Headphones() {
+export default function Headphones({ navigation }) {
   const headphones = useSelector(selectHeadphones);
+
+  const onPressSeeProduct = (id) => {
+    navigation.navigate("ProductDetails", { id});
+  }
 
   return (
     <SafeAreaView>
       <ScrollView>
         <AppHeader />
         <CategoryTitle title="headphones" />
-        {/* <Pressable style={styles.backButton}>
-          <Ionicons name="chevron-back-sharp" size={20} color="black" />
-          <Text preset='light' style={{color: 'black'}}>Go Back</Text>
-        </Pressable> */}
         <View style={styles.categorySection}>
           {headphones.map((headphone) => {
             return (
@@ -43,8 +42,8 @@ export default function Headphones() {
                   <Text preset="light" style={styles.description}>
                     {headphone.description}
                   </Text>
-                  <Pressable style={styles.button}>
-                    <Text uppercase white>
+                  <Pressable style={styles.button} onPress={() => onPressSeeProduct(headphone.id)}>
+                    <Text preset='subtitle' uppercase white>
                       See product
                     </Text>
                   </Pressable>
@@ -96,7 +95,7 @@ const styles = StyleSheet.create({
   description: {
     marginVertical: spacing[5],
     marginHorizontal: spacing[5],
-    color: "black",
+    color: colors.darkGrey,
     textAlign: "center",
   },
   button: {
