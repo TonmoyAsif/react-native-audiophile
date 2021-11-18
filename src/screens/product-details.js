@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { View, StyleSheet, ScrollView, Image, Pressable } from "react-native";
 import Text from "../components/text/text";
@@ -8,11 +8,40 @@ import { selectProductById } from "../../redux/productSlice";
 import { colors, spacing } from "../theme";
 import { Ionicons } from "@expo/vector-icons";
 import CounterButton from "../components/counter-button";
+import { showMessage } from "react-native-flash-message";
+import { addToCart } from "../../redux/cartSlice";
+
 
 export default function ProductDetails({ navigation, route }) {
   const id = route.params.id;
   const product = useSelector(state => selectProductById(state, id));
   const { name, price, category, description, featuredImage, features, included, images } = product;
+  const [amount, setAmount] = useState(0);
+  const dispatch = useDispatch();
+
+  const addProductToCart = () => {
+    if(amount === 0) {
+      return showMessage({
+        message: "Amount must be greater than 0",
+        type: "danger"
+      });
+    }
+    const cartProduct = {
+      id,
+      name,
+      featuredImage,
+      price,
+      quantityPrice: price * amount,
+      amount: amount
+    }
+
+    dispatch(addToCart({ cartProduct }))
+    showMessage({
+      message: "Product added to cart",
+      type: "success"
+    })
+  };
+    
 
   return (
     <SafeAreaView>
@@ -44,8 +73,8 @@ export default function ProductDetails({ navigation, route }) {
               $ {price}
             </Text>
             <View style={styles.cartSection}>
-              <CounterButton/>
-              <Pressable style={styles.button}>
+              <CounterButton amount={amount} setAmount={setAmount}/>
+              <Pressable style={styles.button} onPress={addProductToCart}>
                 <Text uppercase white>
                   Add to cart
                 </Text>

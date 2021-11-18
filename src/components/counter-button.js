@@ -3,14 +3,13 @@ import { View, StyleSheet, Pressable } from "react-native";
 import Text from "./text/text";
 import { colors, spacing } from "../theme";
 
-export default function CounterButton({ style }) {
-    const [count, setCount] = React.useState(0);
+export default function CounterButton({ style, amount, setAmount }) {
     const onIncrement = () => {
-        setCount(count + 1);
+        setAmount(amount + 1);
     };
     const onDecrement = () => {
-        if(count > 0) {
-            setCount(count - 1);
+        if(amount > 0) {
+            setAmount(amount - 1);
         }
     };
 
@@ -19,7 +18,7 @@ export default function CounterButton({ style }) {
             <Pressable onPress={onDecrement} style={styles.counterBtn}>
                 <Text preset='h7' textColor={colors.darkGrey}>-</Text>
             </Pressable>
-            <Text style={styles.countText}>{count}</Text>
+            <Text style={styles.countText}>{amount}</Text>
             <Pressable onPress={onIncrement} style={styles.counterBtn}>
                 <Text preset='h7' textColor={colors.darkGrey}>+</Text>
             </Pressable>

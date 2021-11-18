@@ -15,6 +15,8 @@ import Earphones from "../screens/earphones";
 import Cart from "../screens/cart";
 import Checkout from "../screens/checkout";
 import ProductDetails from "../screens/product-details";
+import { useSelector } from "react-redux";
+import { selectCartLength } from "../../redux/cartSlice";
 
 const THEME = {
   ...DefaultTheme,
@@ -34,6 +36,7 @@ export default function navigation() {
 
 const BottomTab = createBottomTabNavigator();
 function BottomTabNavigator() {
+  const cartLength = useSelector(selectCartLength);
   return (
     <BottomTab.Navigator
       initialRouteName="Home"
@@ -85,6 +88,7 @@ function BottomTabNavigator() {
           tabBarIcon: ({ color }) => (
             <TabBarIcon fontFamily="Ionicons" name="cart-outline" color={color} />
           ),
+          tabBarBadge: cartLength > 0 ? cartLength : null
         }}
       />
     </BottomTab.Navigator>

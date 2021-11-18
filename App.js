@@ -7,6 +7,10 @@ import { Provider } from "react-redux";
 import FlashMessage from "react-native-flash-message";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import Navigation from "./src/navigation";
+import { persistStore } from "redux-persist";
+import { PersistGate } from "redux-persist/integration/react";
+
+let persistor = persistStore(store);
 
 export default function App() {
   let [fontsLoaded] = useFonts({
@@ -21,11 +25,13 @@ export default function App() {
   } else {
     return (
       <Provider store={store}>
-        <SafeAreaProvider>
-          <Navigation />
-          <StatusBar />
-          <FlashMessage position="top" floating statusBarHeight={30} />
-        </SafeAreaProvider>
+        <PersistGate loading={null} persistor={persistor}>
+          <SafeAreaProvider>
+            <Navigation />
+            <StatusBar />
+            <FlashMessage position="top" floating statusBarHeight={30} />
+          </SafeAreaProvider>
+        </PersistGate>
       </Provider>
     );
   }
