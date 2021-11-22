@@ -5,7 +5,7 @@ import Text from "../components/text/text";
 import AppHeader from "../components/app-header";
 import { useDispatch, useSelector } from "react-redux";
 import { selectProductById } from "../../redux/productSlice";
-import { colors, spacing } from "../theme";
+import { colors, spacing, typography } from "../theme";
 import { Ionicons } from "@expo/vector-icons";
 import CounterButton from "../components/counter-button";
 import { showMessage } from "react-native-flash-message";
@@ -23,7 +23,8 @@ export default function ProductDetails({ navigation, route }) {
     if(amount === 0) {
       return showMessage({
         message: "Amount must be greater than 0",
-        type: "danger"
+        type: "danger",
+        titleStyle: { fontFamily: typography.regular }
       });
     }
     const cartProduct = {
@@ -38,7 +39,8 @@ export default function ProductDetails({ navigation, route }) {
     dispatch(addToCart({ cartProduct }))
     showMessage({
       message: "Product added to cart",
-      type: "success"
+      type: "success",
+      titleStyle: { fontFamily: typography.regular }
     })
   };
     

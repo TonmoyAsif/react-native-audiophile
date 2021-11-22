@@ -42,6 +42,10 @@ export const presets = {
         ...BOLD,
         fontSize: 17
     },
+    h8: {
+        ...BOLD,
+        fontSize: 15
+    },
     overline: {
         fontFamily: typography.regular,
         fontSize: 14

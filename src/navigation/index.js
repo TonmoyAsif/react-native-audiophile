@@ -1,8 +1,9 @@
 import React from "react";
+import { StyleSheet } from "react-native";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { colors } from "../theme";
+import { colors, typography } from "../theme";
 import {
   Ionicons,
   MaterialCommunityIcons,
@@ -43,6 +44,8 @@ function BottomTabNavigator() {
       screenOptions={{
         headerShown: false,
         tabBarActiveTintColor: colors.primary,
+        tabBarLabelStyle: styles.labelStyle,
+        tabBarBadgeStyle: styles.badgeStyle,
       }}
     >
       <BottomTab.Screen
@@ -154,3 +157,15 @@ function CartStackScreens() {
     </CartStack.Navigator>
   );
 }
+
+const styles = StyleSheet.create({
+  labelStyle: {
+    fontFamily: typography.regular
+  },
+  badgeStyle: {
+    backgroundColor: colors.primary,
+    color: colors.white,
+    fontFamily: typography.regular,
+    fontSize: 11
+  }
+});

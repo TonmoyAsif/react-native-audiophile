@@ -3,7 +3,7 @@ import { View, StyleSheet, Pressable } from "react-native";
 import Text from "./text/text";
 import { colors, spacing } from "../theme";
 
-export default function CounterButton({ style, amount, setAmount }) {
+export default function CounterButton({ style, amount, setAmount, buttonWidth=140 }) {
     const onIncrement = () => {
         setAmount(amount + 1);
     };
@@ -14,7 +14,7 @@ export default function CounterButton({ style, amount, setAmount }) {
     };
 
     return (
-        <View style={[styles.wrapper,style ]}>
+        <View style={[styles.wrapper,style, {width: buttonWidth}]}>
             <Pressable onPress={onDecrement} style={styles.counterBtn}>
                 <Text preset='h7' textColor={colors.darkGrey}>-</Text>
             </Pressable>
@@ -29,7 +29,6 @@ export default function CounterButton({ style, amount, setAmount }) {
 const styles = StyleSheet.create({
     wrapper: {
         alignItems: "center",
-        width: 140,
         height: 53,
         flexDirection: "row",
         backgroundColor: colors.grey
