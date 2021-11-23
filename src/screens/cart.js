@@ -4,11 +4,12 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Text from "../components/text/text";
 import { colors, spacing } from "../theme";
 import LottieView from 'lottie-react-native';
+import AppHeader from "../components/app-header";
 import { useDispatch, useSelector } from "react-redux";
 import { selectCart, selectTotalAmount, addToCart, deleteFromCart, reset } from "../../redux/cartSlice";
 import CounterButton from "../components/counter-button";
 
-export default function Cart() {
+export default function Cart({ navigation }) {
   const cart = useSelector(selectCart);
   const totalAmount = useSelector(selectTotalAmount);
   const dispatch = useDispatch();
@@ -16,6 +17,11 @@ export default function Cart() {
   const resetCart = () => {
     dispatch(reset());
   };
+
+  const onPressCheckout = () => {
+    navigation.navigate("Checkout");
+  };
+
 
   const onAmountChange = (value, cartItem) => {
     if(value === 0) {
@@ -59,6 +65,7 @@ export default function Cart() {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={{flexGrow: 1}}>
+        <AppHeader />
         <View style={styles.cartContainer}>
           <View style={styles.header}>
             <Text preset='h6' uppercase style={styles.headerText}>
@@ -97,7 +104,7 @@ export default function Cart() {
           <Text preset='h7'> {`$ ${totalAmount}`}</Text>
         </View>
         <View style={{ flex: 1, justifyContent: 'flex-end', margin: spacing[5]}}>
-          <Pressable style={styles.button}>
+          <Pressable style={styles.button} onPress={onPressCheckout}>
             <Text uppercase white>
               Checkout
             </Text>
