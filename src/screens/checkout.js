@@ -13,6 +13,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import Summary from "../components/summary";
 import Modal from 'react-native-modal'
+import ConfirmationModal from "../components/confirmation-modal";
 
 const SHIPPING_PRICE = 50;
 const VAT =500;
@@ -47,7 +48,7 @@ export default function Checkout({ navigation }) {
       country: "",
       zip: "",
     },
-    // validationSchema: schema,
+    validationSchema: schema,
     onSubmit: (values) => {
       toggleModal()
     },
@@ -172,7 +173,13 @@ export default function Checkout({ navigation }) {
       {
         isModalVisible && (
           <Modal isVisible={isModalVisible}>
-            <Text preset="h5" uppercase>Thank you</Text>
+            <ConfirmationModal
+              cartItems={cartItems}
+              totalPrice={totalPrice}
+              shippingPrice={SHIPPING_PRICE}
+              vat={VAT}
+              toggleModal={toggleModal}
+            />
           </Modal>
         )
       }
