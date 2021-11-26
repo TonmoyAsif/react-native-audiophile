@@ -18,6 +18,26 @@ import Checkout from "../screens/checkout";
 import ProductDetails from "../screens/product-details";
 import { useSelector } from "react-redux";
 import { selectCartLength } from "../../redux/cartSlice";
+import { StackActions } from '@react-navigation/native';
+
+const resetStackOnTabPress = ({ navigation }) => ({
+  tabPress: (e) => {
+    const state = navigation.getState();
+    if (state) {
+      const nonTargetTabs = state.routes.filter((r) => r.key !== e.target);
+      nonTargetTabs.forEach((tab) => {
+        const tabName = tab?.name;
+        const stackKey = tab?.state?.key;
+        if (stackKey) {
+          navigation.dispatch({
+            ...StackActions.popToTop(),
+            target: stackKey,
+          });
+        }
+      });
+    }
+  },
+});
 
 const THEME = {
   ...DefaultTheme,
@@ -51,6 +71,7 @@ function BottomTabNavigator() {
       <BottomTab.Screen
         name="Home"
         component={HomeStackScreens}
+        listeners={resetStackOnTabPress}
         options={{
           tabBarIcon: ({ color }) => (
             <TabBarIcon fontFamily="Ionicons" name="home" color={color} />
@@ -60,6 +81,7 @@ function BottomTabNavigator() {
       <BottomTab.Screen
         name="Headphones"
         component={HeadphonesStackScreens}
+        listeners={resetStackOnTabPress}
         options={{
           tabBarIcon: ({ color }) => (
             <TabBarIcon fontFamily="MaterialCommunityIcons" name="headphones" color={color} />
@@ -69,6 +91,7 @@ function BottomTabNavigator() {
       <BottomTab.Screen
         name="Speakers"
         component={SpeakersStackScreens}
+        listeners={resetStackOnTabPress}
         options={{
           tabBarIcon: ({ color }) => (
             <TabBarIcon fontFamily="MaterialCommunityIcons" name="speaker" color={color} />
@@ -78,6 +101,7 @@ function BottomTabNavigator() {
       <BottomTab.Screen
         name="Earphones"
         component={EarphonesStackScreens}
+        listeners={resetStackOnTabPress}
         options={{
           tabBarIcon: ({ color }) => (
             <TabBarIcon fontFamily="SimpleLineIcons" name="earphones-alt" color={color} />
@@ -87,6 +111,7 @@ function BottomTabNavigator() {
       <BottomTab.Screen
         name="Cart"
         component={CartStackScreens}
+        listeners={resetStackOnTabPress}
         options={{
           tabBarIcon: ({ color }) => (
             <TabBarIcon fontFamily="Ionicons" name="cart-outline" color={color} />

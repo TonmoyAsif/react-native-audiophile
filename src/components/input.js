@@ -1,10 +1,10 @@
 import React from 'react'
 import { View, TextInput, StyleSheet } from 'react-native'
 import Text from './text/text'
-import { colors, spacing } from '../theme'
+import { colors, spacing, typography } from '../theme'
 
 
-export default function Input({ label, placeholder, onChangeText, onBlur }) {
+export default function Input({ label, placeholder, keyboard='default', onChangeText, onBlur }) {
     return (
         <View style={styles.box}>
             <Text preset="subtitle" style={styles.title}>
@@ -13,6 +13,7 @@ export default function Input({ label, placeholder, onChangeText, onBlur }) {
             <TextInput 
                 placeholder={placeholder}
                 style={styles.field}
+                keyboardType={keyboard}
                 onChangeText={onChangeText}
                 onBlur={onBlur}
             />
@@ -31,6 +32,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 8,
         borderColor: '#cfcfcf',
-        padding: 12
+        padding: 12,
+        fontFamily: typography.regular,
     }
   });

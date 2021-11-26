@@ -5,7 +5,7 @@ import AnimatedLottieView from 'lottie-react-native'
 import { colors, spacing } from '../theme'
 import { useDispatch } from "react-redux";
 import { reset } from "../../redux/cartSlice";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, StackActions } from "@react-navigation/native";
 
 export default function ConfirmationModal({ cartItems, totalPrice, shippingPrice, vat, toggleModal }) {
     const dispatch = useDispatch();
@@ -14,6 +14,9 @@ export default function ConfirmationModal({ cartItems, totalPrice, shippingPrice
     const onPressDone = () => {
         toggleModal()
         dispatch(reset())
+        navigation.dispatch(
+            StackActions.popToTop()
+        );
         navigation.navigate('Home')
     }
 

@@ -4,7 +4,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Text from "../components/text/text";
 import AppHeader from "../components/app-header";
 import { useDispatch, useSelector } from "react-redux";
-import { colors, spacing } from "../theme";
+import { colors, spacing, typography } from "../theme";
 import { Ionicons } from "@expo/vector-icons";
 import Input from "../components/input";
 import Checkbox from "../components/checkbox";
@@ -14,6 +14,7 @@ import * as Yup from "yup";
 import Summary from "../components/summary";
 import Modal from 'react-native-modal'
 import ConfirmationModal from "../components/confirmation-modal";
+import Dropdown from "../components/dropdown";
 
 const SHIPPING_PRICE = 50;
 const VAT =500;
@@ -24,7 +25,6 @@ const schema = Yup.object().shape({
   phone: Yup.string().required("Phone is required"),
   address: Yup.string().required("Address is required"),
   city: Yup.string().required("City is required"),
-  country: Yup.string().required("Country is required"),
   zip: Yup.string().required("Zip is required")
 });
 
@@ -33,6 +33,15 @@ export default function Checkout({ navigation }) {
   const totalPrice = useSelector(selectTotalAmount);
   const dispatch = useDispatch();
   const [isModalVisible, setIsModalVisible] = React.useState(false);
+
+  const [openCountryDropdown, setOpenCountryDropdown] = React.useState(false);
+  const [country, setCountry] = React.useState(null);
+  const [countryList, setCountryList] = React.useState([
+    {label: 'United State', value: 'United State'},
+    {label: 'United Kingdom', value: 'United Kingdom'},
+    {label: 'Bangladesh', value: 'Bangladesh'},
+    {label: 'India', value: 'India'},
+  ]);
 
   const toggleModal = () => {
       setIsModalVisible(!isModalVisible);
@@ -45,7 +54,6 @@ export default function Checkout({ navigation }) {
       phone: "",
       address: "",
       city: "",
-      country: "",
       zip: "",
     },
     validationSchema: schema,
@@ -83,6 +91,7 @@ export default function Checkout({ navigation }) {
             <Input
               label="Email address"
               placeholder="john@gmail.com"
+              keyboard="email-address"
               onChangeText={formik.handleChange('email')}
               onBlur={formik.handleBlur('email')}
             />
@@ -95,6 +104,7 @@ export default function Checkout({ navigation }) {
             <Input
               label="Phone number"
               placeholder="+1823998213"
+              keyboard="phone-pad"
               onChangeText={formik.handleChange('phone')}
               onBlur={formik.handleBlur('phone')}
             />
@@ -123,6 +133,7 @@ export default function Checkout({ navigation }) {
             <Input
               label="Zip code"
               placeholder="23213"
+              keyboard="numeric"
               onChangeText={formik.handleChange('zip')}
               onBlur={formik.handleBlur('zip')}
             />
@@ -144,17 +155,15 @@ export default function Checkout({ navigation }) {
               </Text>
             )}
 
-            <Input
+            <Dropdown
               label="Country"
-              placeholder="United Kingdom"
-              onChangeText={formik.handleChange('country')}
-              onBlur={formik.handleBlur('country')}
+              open={openCountryDropdown}
+              value={country}
+              items={countryList}
+              setOpen={setOpenCountryDropdown}
+              setValue={setCountry}
+              setItems={setCountryList}
             />
-            {formik.touched.country && formik.errors.country && (
-              <Text preset='subtitle' style={styles.invalid}>
-                {formik.errors.country}
-              </Text>
-            )}
 
             <Text textColor={colors.primary} uppercase style={styles.subtitle}>
                 Payment details

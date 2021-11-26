@@ -53,6 +53,7 @@ export default function Cart({ navigation }) {
   if( cart.length === 0 ) {
     return (
       <SafeAreaView style={styles.emptyCart}>
+        <AppHeader />
         <LottieView style={styles.emptyLottie} 
           source={require('../../assets/images/empty-cart.json')}
           autoPlay loop={false}
@@ -118,9 +119,9 @@ export default function Cart({ navigation }) {
 const styles = StyleSheet.create({
   emptyCart: {
     flex: 1,
-    margin: spacing[5]
   },
   emptyLottie: {
+    margin: spacing[5],
     alignSelf: 'center',
   },
   container: {
